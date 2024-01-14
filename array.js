@@ -877,3 +877,46 @@ const strRev = (input) =>
 const empArr = [1, , 2, null, 3, undefined, 4, 5];
 console.log(empArr.length);
 console.log(empArr.filter((x) => x));
+
+
+const users1 = [
+  { id: 1, name: 'John', email: 'john@test.com', department: 'IT' },
+  { id: 2, name: 'Doe', email: 'Doe@test.com', department: 'Marketing' },
+  { id: 3, name: 'Morgan', email: 'Morgan@test.com', department: 'IT' },
+  { id: 4, name: 'Martha', email: 'Martha@test.com', department: 'Marketing' },
+  { id: 5, name: 'Dave', email: 'Dave@test.com', department: 'Sales' },
+  { id: 6, name: 'Oslo', email: 'Oslo@test.com', department: 'Sales' },
+  { id: 7, name: 'Qiev', email: 'Qiev@test.com', department: 'Product' },
+  { id: 8, name: 'Hanzel', email: 'Hanzel@test.com', department: 'Product' },
+  { id: 9, name: 'Mats', email: 'Mats@test.com', department: 'Sales' },
+  { id: 10, name: 'Yoshimura', email: 'Yoshimura@test.com', department: 'IT' }
+]
+
+const tasks = [
+  { id: 1, department: 'IT', title: 'Develop company landing page' },
+  { id: 2, department: 'IT', title: 'Develop company API' },
+  { id: 3, department: 'Product', title: 'Call customers' },
+  { id: 4, department: 'Sales', title: 'Sells more!' },
+  { id: 5, department: 'IT', title: 'QA' },
+]
+
+const mapTasksToUsers = (users,tasks) => {
+  // map user by department for mapping
+  const userDepMap = users.reduce((map,{department,...user}) => {
+    if(!map[department]){
+      map[department]=[];
+    } 
+      map[department].push({...user});
+    return map;
+  },{});
+
+  //map task to users by department
+  const result = tasks.map((task) => ({...task,users:userDepMap[task.department]}));
+  return result;
+}
+
+const a = mapTasksToUsers(users1,tasks);
+for(let b of a){
+
+  console.log(b);
+}
